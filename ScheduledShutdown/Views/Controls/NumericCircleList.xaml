@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="ScheduledShutdown.Views.Controls.NumericCircleList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ScheduledShutdown.Views.Controls"
+             mc:Ignorable="d" 
+             FontWeight="Bold"
+             MouseWheel="OnMouseWheel"
+             HorizontalContentAlignment="Center"
+             VerticalContentAlignment="Center"
+             FontSize="48" Loaded="OnLoaded">
+    <UserControl.DataContext>
+        <Binding RelativeSource="{RelativeSource Mode=Self}"/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="FarItemStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#6F000000"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <BlurEffect Radius="12" KernelType="Gaussian"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="NearItemStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#AF000000"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <BlurEffect Radius="8" KernelType="Gaussian"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel x:Name="NumberPresenter" Orientation="Vertical" HorizontalAlignment="{Binding HorizontalContentAlignment}" VerticalAlignment="{Binding VerticalContentAlignment}">
+            <TextBlock d:Text="00" Style="{DynamicResource FarItemStyle}" FontSize="{Binding FontSize, Converter={StaticResource DoubleSubtractConverter}, ConverterParameter=8}" HorizontalAlignment="Center"/>
+            <TextBlock d:Text="00" Style="{DynamicResource NearItemStyle}" FontSize="{Binding FontSize, Converter={StaticResource DoubleSubtractConverter}, ConverterParameter=4}" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="CurrentSelect" d:Text="00" FontSize="{Binding FontSize}" HorizontalAlignment="Center"/>
+            <TextBlock d:Text="00" Style="{DynamicResource NearItemStyle}" FontSize="{Binding FontSize, Converter={StaticResource DoubleSubtractConverter}, ConverterParameter=4}" HorizontalAlignment="Center"/>
+            <TextBlock d:Text="00" Style="{DynamicResource FarItemStyle}" FontSize="{Binding FontSize, Converter={StaticResource DoubleSubtractConverter}, ConverterParameter=8}" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

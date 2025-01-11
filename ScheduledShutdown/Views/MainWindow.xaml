@@ -1,0 +1,52 @@
+﻿<Window x:Class="ScheduledShutdown.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScheduledShutdown"
+        xmlns:controls="clr-namespace:ScheduledShutdown.Views.Controls"
+        xmlns:vm="clr-namespace:ScheduledShutdown.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
+        Title="定时关机" Height="539" Width="331" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="/Resources/AppIcon.ico" Closed="OnClosed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <GroupBox Grid.Row="0" Style="{StaticResource MDGroupBox}" VerticalAlignment="Center" Margin="16">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="此电脑将于 "/>
+                        <TextBlock d:Text="今天" Text="{Binding ScheduledTime, Converter={StaticResource NearDateToStringConverter}}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock d:Text="00:00:00" Text="{Binding ScheduledTime, Converter={StaticResource TimeToStringConverter}, ConverterParameter=HH:mm:ss}"/>
+                        <TextBlock Text=" 关闭"/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="模式："/>
+                    <RadioButton Content="时间" Margin="0,0,16,0" IsChecked="{Binding SelectedMode}" Checked="OnModeChanged"/>
+                    <RadioButton Content="倒计时" Checked="OnModeChanged"/>
+                </StackPanel>
+            </GroupBox>
+
+            <Grid Grid.Row="1" MouseWheel="OnSelectedTimeChanged">
+                <controls:TimePicker HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="52" Visibility="{Binding SelectedMode, Converter={StaticResource BooleanToVisibilityConverter}}" SelectedTime="{Binding SelectedDateTime, Mode=TwoWay}"/>
+                <controls:TimeSpanPicker HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="52" Visibility="{Binding SelectedMode, Converter={StaticResource BooleanToVisibilityReConverter}}" SelectedTimeSpan="{Binding SelectedTimeSpan, Mode=TwoWay}"/>
+            </Grid>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="24">
+            <Button Content="确定" Margin="0,0,16,0" Padding="32,8" Command="{Binding AcceptCommand}"/>
+            <Button Content="取消" Padding="32,8" Command="{Binding CancelCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

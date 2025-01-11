@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="ScheduledShutdown.Views.Controls.TimeSpanPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ScheduledShutdown.Views.Controls"
+             mc:Ignorable="d"
+             MouseWheel="OnMouseWheel">
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <local:NumericCircleList MaxValue="24" FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TimeSpanPicker}, Path=FontSize}" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TimeSpanPicker}, Path=SelectedHour, Mode=TwoWay}"/>
+            <TextBlock Text=":" FontWeight="Bold" FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TimeSpanPicker}, Path=FontSize}" VerticalAlignment="Center" Margin="8,0"/>
+            <local:NumericCircleList MaxValue="60" FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TimeSpanPicker}, Path=FontSize}" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TimeSpanPicker}, Path=SelectedMinute, Mode=TwoWay}"/>
+            <TextBlock Text=":" FontWeight="Bold" FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TimeSpanPicker}, Path=FontSize}" VerticalAlignment="Center" Margin="8,0"/>
+            <local:NumericCircleList MaxValue="60" FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TimeSpanPicker}, Path=FontSize}" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:TimeSpanPicker}, Path=SelectedSecond, Mode=TwoWay}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
